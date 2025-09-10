@@ -1,0 +1,203 @@
+name: Build and Deploy wpsSimulator
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: maven
+    
+    - name: Configure Maven settings
+      run: |
+        mkdir -p ~/.m2
+        cp .github/maven-settings.xml ~/.m2/settings.xml
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Verify Maven configuration
+      run: mvn help:effective-settings -P github-packages
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Check BESA dependencies availability
+      id: check-deps
+      run: |
+        echo "Checking if BESA ecosystem is available in GitHub Packages..."
+        if mvn dependency:resolve -P github-packages -B -q 2>/dev/null; then
+          echo "deps-available=true" >> $GITHUB_OUTPUT
+          echo "✅ All BESA dependencies found in GitHub Packages"
+        else
+          echo "deps-available=false" >> $GITHUB_OUTPUT
+          echo "⚠️ Some BESA dependencies not found in GitHub Packages"
+        fi
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      continue-on-error: true
+    
+    - name: Clone and Build BESA ecosystem (if needed)
+      if: steps.check-deps.outputs.deps-available == 'false'
+      run: |
+        echo "📦 Cloning BESA ecosystem for local build..."
+        cd ..
+        
+        # Clone and build KernelBESA
+        if [ ! -d "KernelBESA" ]; then
+          echo "📦 Cloning KernelBESA..."
+          git clone https://github.com/ISCOUTB/KernelBESA.git
+        fi
+        cd KernelBESA
+        echo "🔨 Building KernelBESA..."
+        mvn clean install -B -q
+        echo "✅ KernelBESA built and installed locally"
+        
+        # Clone and build RationalBESA
+        cd ..
+        if [ ! -d "RationalBESA" ]; then
+          echo "📦 Cloning RationalBESA..."
+          git clone https://github.com/ISCOUTB/RationalBESA.git
+        fi
+        cd RationalBESA
+        echo "🔨 Building RationalBESA..."
+        mvn clean install -B -q
+        echo "✅ RationalBESA built and installed locally"
+        
+        # Clone and build BDIBESA
+        cd ..
+        if [ ! -d "BDIBESA" ]; then
+          echo "📦 Cloning BDIBESA..."
+          git clone https://github.com/ISCOUTB/BDIBESA.git
+        fi
+        cd BDIBESA
+        echo "🔨 Building BDIBESA..."
+        mvn clean install -B -q
+        echo "✅ BDIBESA built and installed locally"
+        
+        # Clone and build eBDIBESA
+        cd ..
+        if [ ! -d "eBDIBESA" ]; then
+          echo "📦 Cloning eBDIBESA..."
+          git clone https://github.com/ISCOUTB/eBDIBESA.git
+        fi
+        cd eBDIBESA
+        echo "🔨 Building eBDIBESA..."
+        mvn clean install -B -q
+        echo "✅ eBDIBESA built and installed locally"
+        
+        # Clone and build LocalBESA
+        cd ..
+        if [ ! -d "LocalBESA" ]; then
+          echo "📦 Cloning LocalBESA..."
+          git clone https://github.com/ISCOUTB/LocalBESA.git
+        fi
+        cd LocalBESA
+        echo "🔨 Building LocalBESA..."
+        mvn clean install -B -q
+        echo "✅ LocalBESA built and installed locally"
+        
+        # Clone and build RemoteBESA
+        cd ..
+        if [ ! -d "RemoteBESA" ]; then
+          echo "📦 Cloning RemoteBESA..."
+          git clone https://github.com/ISCOUTB/RemoteBESA.git
+        fi
+        cd RemoteBESA
+        echo "🔨 Building RemoteBESA..."
+        mvn clean install -B -q
+        echo "✅ RemoteBESA built and installed locally"
+    
+    - name: Build with GitHub Packages
+      if: steps.check-deps.outputs.deps-available == 'true'
+      run: |
+        echo "🔨 Building with github-packages profile..."
+        mvn clean compile package -P github-packages -B
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Build with Local Dependencies
+      if: steps.check-deps.outputs.deps-available == 'false'
+      run: |
+        echo "🔨 Building with local-dev profile..."
+        mvn clean compile package -P local-dev -B
+    
+    - name: Run tests
+      run: |
+        echo "🧪 Running tests..."
+        if [ "${{ steps.check-deps.outputs.deps-available }}" == "true" ]; then
+          mvn test -P github-packages -B
+        else
+          mvn test -P local-dev -B
+        fi
+      continue-on-error: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Verify build artifacts
+      run: |
+        echo "📦 Checking generated artifacts:"
+        if [ -d "target" ]; then
+          echo "Target directory contents:"
+          ls -la target/
+          echo ""
+          if ls target/*.jar 1> /dev/null 2>&1; then
+            echo "✅ JAR files found:"
+            ls -la target/*.jar
+          else
+            echo "❌ No JAR files found in target directory"
+            exit 1
+          fi
+        else
+          echo "❌ Target directory not found"
+          exit 1
+        fi
+    
+    - name: Deploy to GitHub Packages
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: |
+        echo "🚀 Deploying to GitHub Packages..."
+        echo "📋 Deployment conditions:"
+        echo "  - Branch: ${{ github.ref }}"
+        echo "  - Event: ${{ github.event_name }}"
+        echo "  - BESA dependencies available: ${{ steps.check-deps.outputs.deps-available }}"
+        
+        if [ "${{ steps.check-deps.outputs.deps-available }}" == "true" ]; then
+          echo "✅ Using GitHub Packages profile for deploy..."
+          mvn deploy -P github-packages -DskipTests -B
+        else
+          echo "⚠️ Using local-dev profile for deploy..."
+          mvn deploy -P local-dev -DskipTests -B
+        fi
+        echo "✅ Deploy successful"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Show Deploy Information
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: |
+        echo "ℹ️ Deploy completed successfully"
+        echo "📦 wpsSimulator 1.0 should now be available at:"
+        echo "   https://maven.pkg.github.com/ISCOUTB/wpsSimulator"
+        echo ""
+        echo "📝 To use as dependency:"
+        echo "   <dependency>"
+        echo "     <groupId>io.github.iscoutb</groupId>"
+        echo "     <artifactId>wps-simulator</artifactId>"
+        echo "     <version>1.0</version>"
+        echo "   </dependency>"

@@ -3,9 +3,36 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.wpsim</groupId>
-    <artifactId>wpsSimulator</artifactId>
+    <groupId>io.github.iscoutb</groupId>
+    <artifactId>wps-simulator</artifactId>
     <version>1.0</version>
+    <packaging>jar</packaging>
+
+    <name>wpsSimulator</name>
+    <description>Well Production Simulator using BESA framework - Multi-agent simulation platform</description>
+    <url>https://github.com/ISCOUTB/wpsSimulator</url>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>ISCOUTB</name>
+            <organization>Universidad Tecnológica de Bolívar</organization>
+            <organizationUrl>https://www.utb.edu.co</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/ISCOUTB/wpsSimulator.git</connection>
+        <developerConnection>scm:git:ssh://github.com/ISCOUTB/wpsSimulator.git</developerConnection>
+        <url>https://github.com/ISCOUTB/wpsSimulator/tree/main</url>
+    </scm>
 
     <properties>
         <sonar.organization>sidrepuj</sonar.organization>
@@ -15,8 +42,207 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <profiles>
+        <!-- Profile para desarrollo local usando archivos del sistema -->
+        <profile>
+            <id>local-dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <!-- Dependencias BESA locales -->
+                <dependency>
+                    <groupId>io.github.iscoutb</groupId>
+                    <artifactId>kernel-besa</artifactId>
+                    <version>3.5.1</version>
+                    <scope>system</scope>
+                    <systemPath>${project.basedir}/../KernelBESA/target/kernel-besa-3.5.1.jar</systemPath>
+                </dependency>
+                <dependency>
+                    <groupId>io.github.iscoutb</groupId>
+                    <artifactId>rational-besa</artifactId>
+                    <version>3.5</version>
+                    <scope>system</scope>
+                    <systemPath>${project.basedir}/../RationalBESA/target/rational-besa-3.5.jar</systemPath>
+                </dependency>
+                <dependency>
+                    <groupId>io.github.iscoutb</groupId>
+                    <artifactId>bdi-besa</artifactId>
+                    <version>3.5</version>
+                    <scope>system</scope>
+                    <systemPath>${project.basedir}/../BDIBESA/target/bdi-besa-3.5.jar</systemPath>
+                </dependency>
+                <dependency>
+                    <groupId>io.github.iscoutb</groupId>
+                    <artifactId>ebdi-besa</artifactId>
+                    <version>3.5</version>
+                    <scope>system</scope>
+                    <systemPath>${project.basedir}/../eBDIBESA/target/ebdi-besa-3.5.jar</systemPath>
+                </dependency>
+                <dependency>
+                    <groupId>io.github.iscoutb</groupId>
+                    <artifactId>local-besa</artifactId>
+                    <version>3.5</version>
+                    <scope>system</scope>
+                    <systemPath>${project.basedir}/../LocalBESA/target/local-besa-3.5.jar</systemPath>
+                </dependency>
+                <dependency>
+                    <groupId>io.github.iscoutb</groupId>
+                    <artifactId>remote-besa</artifactId>
+                    <version>3.5</version>
+                    <scope>system</scope>
+                    <systemPath>${project.basedir}/../RemoteBESA/target/remote-besa-3.5.jar</systemPath>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <!-- Profile para GitHub Packages -->
+        <profile>
+            <id>github-packages</id>
+            <repositories>
+                <repository>
+                    <id>github</id>
+                    <url>https://maven.pkg.github.com/ISCOUTB/*</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <dependencies>
+                <!-- Dependencias BESA desde GitHub Packages -->
+                <dependency>
+                    <groupId>io.github.iscoutb</groupId>
+                    <artifactId>kernel-besa</artifactId>
+                    <version>3.5.1</version>
+                </dependency>
+                <dependency>
+                    <groupId>io.github.iscoutb</groupId>
+                    <artifactId>rational-besa</artifactId>
+                    <version>3.5</version>
+                </dependency>
+                <dependency>
+                    <groupId>io.github.iscoutb</groupId>
+                    <artifactId>bdi-besa</artifactId>
+                    <version>3.5</version>
+                </dependency>
+                <dependency>
+                    <groupId>io.github.iscoutb</groupId>
+                    <artifactId>ebdi-besa</artifactId>
+                    <version>3.5</version>
+                </dependency>
+                <dependency>
+                    <groupId>io.github.iscoutb</groupId>
+                    <artifactId>local-besa</artifactId>
+                    <version>3.5</version>
+                </dependency>
+                <dependency>
+                    <groupId>io.github.iscoutb</groupId>
+                    <artifactId>remote-besa</artifactId>
+                    <version>3.5</version>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <!-- Profile para perfilado (mantenido por compatibilidad) -->
+        <profile>
+            <id>Perfilado</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <configuration>
+                            <mainClass>org.wpsim.WellProdSim.wpsStart</mainClass>
+                            <arguments>
+                                <argument>-env</argument>
+                                <argument>local</argument>
+                                <argument>-mode</argument>
+                                <argument>single</argument>
+                                <argument>-money</argument>
+                                <argument>750000</argument>
+                                <argument>-land</argument>
+                                <argument>2</argument>
+                                <argument>-personality</argument>
+                                <argument>0.0</argument>
+                                <argument>-tools</argument>
+                                <argument>20</argument>
+                                <argument>-seeds</argument>
+                                <argument>50</argument>
+                                <argument>-water</argument>
+                                <argument>0</argument>
+                                <argument>-nodes</argument>
+                                <argument>1</argument>
+                                <argument>-irrigation</argument>
+                                <argument>0</argument>
+                                <argument>-emotions</argument>
+                                <argument>1</argument>
+                                <argument>-training</argument>
+                                <argument>0</argument>
+                                <argument>-agents</argument>
+                                <argument>500</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
+            <!-- Plugin para compilación -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>21</source>
+                    <target>21</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            
+            <!-- Plugin para generar sources JAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <!-- Plugin para generar javadoc JAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.5.0</version>
+                <configuration>
+                    <source>21</source>
+                    <failOnError>false</failOnError>
+                    <failOnWarnings>false</failOnWarnings>
+                    <additionalOptions>-Xdoclint:none</additionalOptions>
+                    <additionalJOption>-Xdoclint:none</additionalJOption>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- Plugin para ejecutar una clase Java -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -108,106 +334,73 @@
     </build>
 
     <dependencies>
-        <!-- Dependencia para LocalBESA -->
-        <dependency>
-            <groupId>BESA</groupId>
-            <artifactId>KernelBESA</artifactId>
-            <version>3.17.1</version>
-        </dependency>
-
-        <!-- Dependencia para LocalBESA -->
-        <dependency>
-            <groupId>BESA</groupId>
-            <artifactId>LocalBESA</artifactId>
-            <version>3.17</version>
-        </dependency>
-
-        <!-- Dependencia para BDIBESA -->
-        <dependency>
-            <groupId>BESA</groupId>
-            <artifactId>BDIBESA</artifactId>
-            <version>3.17</version>
-        </dependency>
-
-        <!-- Dependencia para RemoteBESA -->
-        <dependency>
-            <groupId>BESA</groupId>
-            <artifactId>RemoteBESA</artifactId>
-            <version>3.17</version>
-        </dependency>
-
-        <!-- Dependencia para RationalBESA -->
-        <dependency>
-            <groupId>BESA</groupId>
-            <artifactId>RationalBESA</artifactId>
-            <version>3.17</version>
-        </dependency>
-
-        <!-- Dependencia para eBDIBESA -->
-        <dependency>
-            <groupId>BESA</groupId>
-            <artifactId>eBDIBESA</artifactId>
-            <version>3.17</version>
-        </dependency>
-
-        <!-- Dependencia para JSON -->
+        <!-- Dependencias externas (no-BESA) -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20231013</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.jgrapht/jgrapht-core -->
+        
         <dependency>
             <groupId>org.jgrapht</groupId>
             <artifactId>jgrapht-core</artifactId>
             <version>1.5.2</version>
         </dependency>
+        
         <dependency>
             <groupId>commons-cli</groupId>
             <artifactId>commons-cli</artifactId>
             <version>1.8.0</version>
         </dependency>
+        
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
             <version>2.12.5</version>
         </dependency>
+        
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.10.1</version>
         </dependency>
+        
         <dependency>
             <groupId>org.snakeyaml</groupId>
             <artifactId>snakeyaml-engine</artifactId>
             <version>2.6</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.36</version>
         </dependency>
+        
         <dependency>
             <groupId>com.tersesystems.logback</groupId>
             <artifactId>logback-core</artifactId>
             <version>1.2.0</version>
         </dependency>
+        
         <dependency>
             <groupId>com.tersesystems.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.2.0</version>
         </dependency>
+        
         <dependency>
             <groupId>io.undertow</groupId>
             <artifactId>undertow-servlet</artifactId>
             <version>2.3.6.Final</version>
         </dependency>
+        
         <dependency>
             <groupId>io.undertow</groupId>
             <artifactId>undertow-websockets-jsr</artifactId>
             <version>2.3.4.Final</version>
         </dependency>
+        
         <dependency>
             <groupId>com.fuzzylite</groupId>
             <artifactId>jfuzzylite</artifactId>
@@ -215,53 +408,12 @@
         </dependency>
     </dependencies>
 
-    <profiles>
-        <profile>
-            <id>Perfilado</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <version>3.0.0</version>
-                        <configuration>
-                            <mainClass>org.wpsim.WellProdSim.wpsStart</mainClass>
-                            <arguments>
-                                <argument>-env</argument>
-                                <argument>local</argument>
-                                <argument>-mode</argument>
-                                <argument>single</argument>
-                                <argument>-money</argument>
-                                <argument>750000</argument>
-                                <argument>-land</argument>
-                                <argument>2</argument>
-                                <argument>-personality</argument>
-                                <argument>0.0</argument>
-                                <argument>-tools</argument>
-                                <argument>20</argument>
-                                <argument>-seeds</argument>
-                                <argument>50</argument>
-                                <argument>-water</argument>
-                                <argument>0</argument>
-                                <argument>-nodes</argument>
-                                <argument>1</argument>
-                                <argument>-irrigation</argument>
-                                <argument>0</argument>
-                                <argument>-emotions</argument>
-                                <argument>1</argument>
-                                <argument>-training</argument>
-                                <argument>0</argument>
-                                <argument>-agents</argument>
-                                <argument>500</argument>
-                            </arguments>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub ISCOUTB Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/ISCOUTB/wpsSimulator</url>
+        </repository>
+    </distributionManagement>
 
 </project>

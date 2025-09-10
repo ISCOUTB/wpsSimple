@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 
+          https://maven.apache.org/xsd/settings-1.0.0.xsd">
+  
+  <servers>
+    <server>
+      <id>github</id>
+      <username>jairoserrano</username>
+      <password>${env.GITHUB_TOKEN}</password>
+    </server>
+    <server>
+      <id>github-kernelbesa</id>
+      <username>jairoserrano</username>
+      <password>${env.GITHUB_TOKEN}</password>
+    </server>
+    <server>
+      <id>github-rationalbesa</id>
+      <username>jairoserrano</username>
+      <password>${env.GITHUB_TOKEN}</password>
+    </server>
+    <server>
+      <id>github-bdibesa</id>
+      <username>jairoserrano</username>
+      <password>${env.GITHUB_TOKEN}</password>
+    </server>
+    <server>
+      <id>github-ebdibesa</id>
+      <username>jairoserrano</username>
+      <password>${env.GITHUB_TOKEN}</password>
+    </server>
+    <server>
+      <id>github-localbesa</id>
+      <username>jairoserrano</username>
+      <password>${env.GITHUB_TOKEN}</password>
+    </server>
+    <server>
+      <id>github-remotebesa</id>
+      <username>jairoserrano</username>
+      <password>${env.GITHUB_TOKEN}</password>
+    </server>
+    <server>
+      <id>github-wpssimulator</id>
+      <username>jairoserrano</username>
+      <password>${env.GITHUB_TOKEN}</password>
+    </server>
+    <server>
+      <id>github-all</id>
+      <username>jairoserrano</username>
+      <password>${env.GITHUB_TOKEN}</password>
+    </server>
+  </servers>
+  
+</settings>

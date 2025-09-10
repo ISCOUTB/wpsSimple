@@ -1,11 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.wpsim</groupId>
-  <artifactId>wpsSimulator</artifactId>
+  <groupId>io.github.iscoutb</groupId>
+  <artifactId>wps-simulator</artifactId>
+  <name>wpsSimulator</name>
   <version>1.0</version>
+  <description>Well Production Simulator using BESA framework - Multi-agent simulation platform</description>
+  <url>https://github.com/ISCOUTB/wpsSimulator</url>
+  <developers>
+    <developer>
+      <name>ISCOUTB</name>
+      <organization>Universidad Tecnológica de Bolívar</organization>
+      <organizationUrl>https://www.utb.edu.co</organizationUrl>
+    </developer>
+  </developers>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <scm>
+    <connection>scm:git:git://github.com/ISCOUTB/wpsSimulator.git</connection>
+    <developerConnection>scm:git:ssh://github.com/ISCOUTB/wpsSimulator.git</developerConnection>
+    <url>https://github.com/ISCOUTB/wpsSimulator/tree/main</url>
+  </scm>
   <build>
     <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <configuration>
+          <source>21</source>
+          <target>21</target>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.3.0</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.5.0</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <source>21</source>
+          <failOnError>false</failOnError>
+          <failOnWarnings>false</failOnWarnings>
+          <additionalOptions>-Xdoclint:none</additionalOptions>
+          <additionalJOption>-Xdoclint:none</additionalJOption>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
@@ -90,6 +152,95 @@
   </build>
   <profiles>
     <profile>
+      <id>local-dev</id>
+      <dependencies>
+        <dependency>
+          <groupId>io.github.iscoutb</groupId>
+          <artifactId>kernel-besa</artifactId>
+          <version>3.5.1</version>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/../KernelBESA/target/kernel-besa-3.5.1.jar</systemPath>
+        </dependency>
+        <dependency>
+          <groupId>io.github.iscoutb</groupId>
+          <artifactId>rational-besa</artifactId>
+          <version>3.5</version>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/../RationalBESA/target/rational-besa-3.5.jar</systemPath>
+        </dependency>
+        <dependency>
+          <groupId>io.github.iscoutb</groupId>
+          <artifactId>bdi-besa</artifactId>
+          <version>3.5</version>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/../BDIBESA/target/bdi-besa-3.5.jar</systemPath>
+        </dependency>
+        <dependency>
+          <groupId>io.github.iscoutb</groupId>
+          <artifactId>ebdi-besa</artifactId>
+          <version>3.5</version>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/../eBDIBESA/target/ebdi-besa-3.5.jar</systemPath>
+        </dependency>
+        <dependency>
+          <groupId>io.github.iscoutb</groupId>
+          <artifactId>local-besa</artifactId>
+          <version>3.5</version>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/../LocalBESA/target/local-besa-3.5.jar</systemPath>
+        </dependency>
+        <dependency>
+          <groupId>io.github.iscoutb</groupId>
+          <artifactId>remote-besa</artifactId>
+          <version>3.5</version>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/../RemoteBESA/target/remote-besa-3.5.jar</systemPath>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>github-packages</id>
+      <repositories>
+        <repository>
+          <snapshots />
+          <id>github</id>
+          <url>https://maven.pkg.github.com/ISCOUTB/*</url>
+        </repository>
+      </repositories>
+      <dependencies>
+        <dependency>
+          <groupId>io.github.iscoutb</groupId>
+          <artifactId>kernel-besa</artifactId>
+          <version>3.5.1</version>
+        </dependency>
+        <dependency>
+          <groupId>io.github.iscoutb</groupId>
+          <artifactId>rational-besa</artifactId>
+          <version>3.5</version>
+        </dependency>
+        <dependency>
+          <groupId>io.github.iscoutb</groupId>
+          <artifactId>bdi-besa</artifactId>
+          <version>3.5</version>
+        </dependency>
+        <dependency>
+          <groupId>io.github.iscoutb</groupId>
+          <artifactId>ebdi-besa</artifactId>
+          <version>3.5</version>
+        </dependency>
+        <dependency>
+          <groupId>io.github.iscoutb</groupId>
+          <artifactId>local-besa</artifactId>
+          <version>3.5</version>
+        </dependency>
+        <dependency>
+          <groupId>io.github.iscoutb</groupId>
+          <artifactId>remote-besa</artifactId>
+          <version>3.5</version>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
       <id>Perfilado</id>
       <build>
         <plugins>
@@ -133,6 +284,13 @@
       </build>
     </profile>
   </profiles>
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub ISCOUTB Apache Maven Packages</name>
+      <url>https://maven.pkg.github.com/ISCOUTB/wpsSimulator</url>
+    </repository>
+  </distributionManagement>
   <properties>
     <maven.compiler.target>21</maven.compiler.target>
     <maven.compiler.source>21</maven.compiler.source>
