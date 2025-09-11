@@ -14,11 +14,12 @@ public class AgroEcosystemMessage extends DataBESA {
     private String date;
 
     /**
+     * Constructor for AgroEcosystemMessage.
      *
-     * @param agroEcosystemMessageType
-     * @param cropId
-     * @param date
-     * @param peasantAgentId
+     * @param agroEcosystemMessageType The type of agro ecosystem message
+     * @param cropId The ID of the crop
+     * @param date The date of the message
+     * @param peasantAgentId The ID of the peasant agent
      */
     public AgroEcosystemMessage(AgroEcosystemMessageType agroEcosystemMessageType, String cropId, String date, String peasantAgentId) {
         this.agroEcosystemMessageType = agroEcosystemMessageType;
@@ -28,8 +29,9 @@ public class AgroEcosystemMessage extends DataBESA {
     }
 
     /**
+     * Returns a string representation of the AgroEcosystemMessage.
      *
-     * @return
+     * @return A string representation of the message
      */
     @Override
     public String toString() {
@@ -37,80 +39,90 @@ public class AgroEcosystemMessage extends DataBESA {
     }
 
     /**
+     * Gets the peasant agent alias.
      *
-     * @return
+     * @return The peasant agent alias
      */
     public String getPeasantAgentAlias() {
         return peasantAgentAlias;
     }
 
     /**
+     * Sets the peasant agent alias.
      *
-     * @param peasantAgentAlias
+     * @param peasantAgentAlias The peasant agent alias to set
      */
     public void setPeasantAgentAlias(String peasantAgentAlias) {
         this.peasantAgentAlias = peasantAgentAlias;
     }
 
     /**
+     * Gets the date of the message.
      *
-     * @return
+     * @return The date of the message
      */
     public String getDate() {
         return date;
     }
 
     /**
+     * Sets the date of the message.
      *
-     * @param date
+     * @param date The date to set
      */
     public void setDate(String date) {
         this.date = date;
     }
 
     /**
+     * Gets the agro ecosystem message type.
      *
-     * @return
+     * @return The agro ecosystem message type
      */
     public AgroEcosystemMessageType getWorldMessageType() {
         return agroEcosystemMessageType;
     }
 
     /**
+     * Sets the agro ecosystem message type.
      *
-     * @param agroEcosystemMessageType
+     * @param agroEcosystemMessageType The message type to set
      */
     public void setWorldMessageType(AgroEcosystemMessageType agroEcosystemMessageType) {
         this.agroEcosystemMessageType = agroEcosystemMessageType;
     }
 
     /**
+     * Gets the crop ID.
      *
-     * @return
+     * @return The crop ID
      */
     public String getCropId() {
         return cropId;
     }
 
     /**
+     * Sets the crop ID.
      *
-     * @param cropId
+     * @param cropId The crop ID to set
      */
     public void setCropId(String cropId) {
         this.cropId = cropId;
     }
 
     /**
+     * Gets the payload of the message.
      *
-     * @return
+     * @return The payload of the message
      */
     public String getPayload() {
         return payload;
     }
 
     /**
+     * Sets the payload of the message.
      *
-     * @param payload
+     * @param payload The payload to set
      */
     public void setPayload(String payload) {
         this.payload = payload;

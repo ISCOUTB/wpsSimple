@@ -63,48 +63,54 @@ public enum Soil {
     }
 
     /**
+     * Gets the water content at field capacity.
      *
-     * @return
+     * @return The water content at field capacity
      */
     public double getWaterContentAtFieldCapacity() {
         return waterContentAtFieldCapacity;
     }
 
     /**
+     * Sets the water content at field capacity.
      *
-     * @param waterContentAtFieldCapacity
+     * @param waterContentAtFieldCapacity The water content at field capacity to set
      */
     public void setWaterContentAtFieldCapacity(double waterContentAtFieldCapacity) {
         this.waterContentAtFieldCapacity = waterContentAtFieldCapacity;
     }
 
     /**
+     * Gets the water content at wilting point.
      *
-     * @return
+     * @return The water content at wilting point
      */
     public double getWaterContentAtWiltingPoint() {
         return waterContentAtWiltingPoint;
     }
 
     /**
+     * Sets the water content at wilting point.
      *
-     * @param waterContentAtWiltingPoint
+     * @param waterContentAtWiltingPoint The water content at wilting point to set
      */
     public void setWaterContentAtWiltingPoint(double waterContentAtWiltingPoint) {
         this.waterContentAtWiltingPoint = waterContentAtWiltingPoint;
     }
 
     /**
+     * Gets the field capacity minus wilting point.
      *
-     * @return
+     * @return The field capacity minus wilting point
      */
     public double getFieldCapacityMinusWiltingPoint() {
         return fieldCapacityMinusWiltingPoint;
     }
 
     /**
+     * Sets the field capacity minus wilting point.
      *
-     * @param fieldCapacityMinusWiltingPoint
+     * @param fieldCapacityMinusWiltingPoint The field capacity minus wilting point to set
      */
     public void setFieldCapacityMinusWiltingPoint(double fieldCapacityMinusWiltingPoint) {
         this.fieldCapacityMinusWiltingPoint = fieldCapacityMinusWiltingPoint;

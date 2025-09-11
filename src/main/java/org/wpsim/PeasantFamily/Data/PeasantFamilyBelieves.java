@@ -212,7 +212,6 @@ public class PeasantFamilyBelieves extends EmotionalComponent implements Believe
      * Si el terreno con el mismo nombre ya existe en la lista, se actualiza con la nueva información.
      *
      * @param newLandInfo La nueva información del terreno.
-     * @return true si el terreno fue actualizado exitosamente, false en caso contrario.
      */
     public void updateAssignedLands(LandInfo newLandInfo) {
         assignedLands.remove(newLandInfo);

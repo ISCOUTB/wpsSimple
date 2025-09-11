@@ -267,7 +267,7 @@ public class CivicAuthorityState extends StateBESA implements Serializable {
     /**
      * Returns the land ownership map.
      *
-     * @return Map<String, String>
+     * @return Map of String to LandInfo
      */
     public synchronized Map<String, LandInfo> getLandOwnership() {
         return landOwnership;

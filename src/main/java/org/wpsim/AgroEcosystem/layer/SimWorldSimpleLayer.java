@@ -33,8 +33,9 @@ public abstract class SimWorldSimpleLayer<C extends LayerCell> extends GenericWo
     protected WorldConfiguration worldConfig = WorldConfiguration.getPropsInstance();
 
     /**
+     * Constructor for SimWorldSimpleLayer.
      *
-     * @param dataFile
+     * @param dataFile The data file to load
      */
     public SimWorldSimpleLayer(String dataFile) {
         this.loadYearDataFromFile(dataFile);
@@ -42,9 +43,10 @@ public abstract class SimWorldSimpleLayer<C extends LayerCell> extends GenericWo
     }
 
     /**
+     * Calculates a Gaussian value from month data.
      *
-     * @param month
-     * @return
+     * @param month The month number
+     * @return A Gaussian random value based on the month's data
      */
     protected double calculateGaussianFromMonthData(int month) {
         MonthData monthData = this.monthlyData.get(month);
@@ -52,8 +54,9 @@ public abstract class SimWorldSimpleLayer<C extends LayerCell> extends GenericWo
     }
 
     /**
+     * Loads yearly data from a file.
      *
-     * @param dataFile
+     * @param dataFile The data file to load from
      */
     protected void loadYearDataFromFile(String dataFile) {
         try {

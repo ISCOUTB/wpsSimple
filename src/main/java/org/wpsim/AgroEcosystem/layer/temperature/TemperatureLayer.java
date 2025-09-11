@@ -16,8 +16,9 @@ public class TemperatureLayer extends SimWorldSimpleLayer<TemperatureCell> {
     //private static final Logger logger = LogManager.getLogger(TemperatureLayer.class);
 
     /**
+     * Constructor for TemperatureLayer.
      *
-     * @param dataFile
+     * @param dataFile The data file to load temperature data from
      */
     public TemperatureLayer(String dataFile) {
         super(dataFile);

@@ -5,7 +5,7 @@
 
     <groupId>io.github.iscoutb</groupId>
     <artifactId>wps-simulator</artifactId>
-    <version>1.0</version>
+    <version>3.6.0</version>
     <packaging>jar</packaging>
 
     <name>wpsSimulator</name>
@@ -56,42 +56,42 @@
                     <artifactId>kernel-besa</artifactId>
                     <version>3.5.1</version>
                     <scope>system</scope>
-                    <systemPath>${project.basedir}/../KernelBESA/target/kernel-besa-3.5.1.jar</systemPath>
+                    <systemPath>${project.basedir}/../KernelBESA/target/kernel-besa-3.6.0.jar</systemPath>
                 </dependency>
                 <dependency>
                     <groupId>io.github.iscoutb</groupId>
                     <artifactId>rational-besa</artifactId>
                     <version>3.5</version>
                     <scope>system</scope>
-                    <systemPath>${project.basedir}/../RationalBESA/target/rational-besa-3.5.jar</systemPath>
+                    <systemPath>${project.basedir}/../RationalBESA/target/rational-besa-3.6.0.jar</systemPath>
                 </dependency>
                 <dependency>
                     <groupId>io.github.iscoutb</groupId>
                     <artifactId>bdi-besa</artifactId>
                     <version>3.5</version>
                     <scope>system</scope>
-                    <systemPath>${project.basedir}/../BDIBESA/target/bdi-besa-3.5.jar</systemPath>
+                    <systemPath>${project.basedir}/../BDIBESA/target/bdi-besa-3.6.0.jar</systemPath>
                 </dependency>
                 <dependency>
                     <groupId>io.github.iscoutb</groupId>
                     <artifactId>ebdi-besa</artifactId>
                     <version>3.5</version>
                     <scope>system</scope>
-                    <systemPath>${project.basedir}/../eBDIBESA/target/ebdi-besa-3.5.jar</systemPath>
+                    <systemPath>${project.basedir}/../eBDIBESA/target/ebdi-besa-3.6.0.jar</systemPath>
                 </dependency>
                 <dependency>
                     <groupId>io.github.iscoutb</groupId>
-                    <artifactId>local-besa</artifactId>
+                    <artifactId>local-besa-simple</artifactId>
                     <version>3.5</version>
                     <scope>system</scope>
-                    <systemPath>${project.basedir}/../LocalBESA/target/local-besa-3.5.jar</systemPath>
+                    <systemPath>${project.basedir}/../LocalBESA/target/local-besa-simple-3.6.0.jar</systemPath>
                 </dependency>
                 <dependency>
                     <groupId>io.github.iscoutb</groupId>
                     <artifactId>remote-besa</artifactId>
                     <version>3.5</version>
                     <scope>system</scope>
-                    <systemPath>${project.basedir}/../RemoteBESA/target/remote-besa-3.5.jar</systemPath>
+                    <systemPath>${project.basedir}/../RemoteBESA/target/remote-besa-3.6.0.jar</systemPath>
                 </dependency>
             </dependencies>
         </profile>
@@ -132,7 +132,7 @@
                 </dependency>
                 <dependency>
                     <groupId>io.github.iscoutb</groupId>
-                    <artifactId>local-besa</artifactId>
+                    <artifactId>local-besa-simple</artifactId>
                     <version>3.5</version>
                 </dependency>
                 <dependency>
