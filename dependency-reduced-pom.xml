@@ -211,22 +211,22 @@
         <dependency>
           <groupId>io.github.iscoutb</groupId>
           <artifactId>kernel-besa</artifactId>
-          <version>3.5.1</version>
+          <version>3.6.0</version>
         </dependency>
         <dependency>
           <groupId>io.github.iscoutb</groupId>
           <artifactId>rational-besa</artifactId>
-          <version>3.5</version>
+          <version>3.6.0</version>
         </dependency>
         <dependency>
           <groupId>io.github.iscoutb</groupId>
           <artifactId>bdi-besa</artifactId>
-          <version>3.5</version>
+          <version>3.6.0</version>
         </dependency>
         <dependency>
           <groupId>io.github.iscoutb</groupId>
           <artifactId>ebdi-besa</artifactId>
-          <version>3.5</version>
+          <version>3.6.0</version>
         </dependency>
         <dependency>
           <groupId>io.github.iscoutb</groupId>
@@ -236,7 +236,7 @@
         <dependency>
           <groupId>io.github.iscoutb</groupId>
           <artifactId>remote-besa</artifactId>
-          <version>3.5</version>
+          <version>3.6.0</version>
         </dependency>
       </dependencies>
     </profile>
@@ -284,50 +284,6 @@
       </build>
     </profile>
   </profiles>
-  <dependencies>
-    <dependency>
-      <groupId>io.github.iscoutb</groupId>
-      <artifactId>kernel-besa</artifactId>
-      <version>3.5.1</version>
-      <scope>system</scope>
-      <systemPath>C:\Users\jairo\Proyectos\simulador\wpsSimulator/../KernelBESA/target/kernel-besa-3.6.0.jar</systemPath>
-    </dependency>
-    <dependency>
-      <groupId>io.github.iscoutb</groupId>
-      <artifactId>rational-besa</artifactId>
-      <version>3.5</version>
-      <scope>system</scope>
-      <systemPath>C:\Users\jairo\Proyectos\simulador\wpsSimulator/../RationalBESA/target/rational-besa-3.6.0.jar</systemPath>
-    </dependency>
-    <dependency>
-      <groupId>io.github.iscoutb</groupId>
-      <artifactId>bdi-besa</artifactId>
-      <version>3.5</version>
-      <scope>system</scope>
-      <systemPath>C:\Users\jairo\Proyectos\simulador\wpsSimulator/../BDIBESA/target/bdi-besa-3.6.0.jar</systemPath>
-    </dependency>
-    <dependency>
-      <groupId>io.github.iscoutb</groupId>
-      <artifactId>ebdi-besa</artifactId>
-      <version>3.5</version>
-      <scope>system</scope>
-      <systemPath>C:\Users\jairo\Proyectos\simulador\wpsSimulator/../eBDIBESA/target/ebdi-besa-3.6.0.jar</systemPath>
-    </dependency>
-    <dependency>
-      <groupId>io.github.iscoutb</groupId>
-      <artifactId>local-besa-simple</artifactId>
-      <version>3.5</version>
-      <scope>system</scope>
-      <systemPath>C:\Users\jairo\Proyectos\simulador\wpsSimulator/../LocalBESA/target/local-besa-simple-3.6.0.jar</systemPath>
-    </dependency>
-    <dependency>
-      <groupId>io.github.iscoutb</groupId>
-      <artifactId>remote-besa</artifactId>
-      <version>3.5</version>
-      <scope>system</scope>
-      <systemPath>C:\Users\jairo\Proyectos\simulador\wpsSimulator/../RemoteBESA/target/remote-besa-3.6.0.jar</systemPath>
-    </dependency>
-  </dependencies>
   <distributionManagement>
     <repository>
       <id>github</id>

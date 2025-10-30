@@ -42,107 +42,124 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/ISCOUTB/*</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <!-- Dependencias BESA desde GitHub Packages -->
+        <dependency>
+            <groupId>io.github.iscoutb</groupId>
+            <artifactId>kernel-besa</artifactId>
+            <version>3.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.iscoutb</groupId>
+            <artifactId>rational-besa</artifactId>
+            <version>3.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.iscoutb</groupId>
+            <artifactId>bdi-besa</artifactId>
+            <version>3.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.iscoutb</groupId>
+            <artifactId>ebdi-besa</artifactId>
+            <version>3.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.iscoutb</groupId>
+            <artifactId>local-besa-simple</artifactId>
+            <version>3.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.iscoutb</groupId>
+            <artifactId>remote-besa</artifactId>
+            <version>3.6.0</version>
+        </dependency>
+
+        <!-- Dependencias externas (no-BESA) -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20231013</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.jgrapht</groupId>
+            <artifactId>jgrapht-core</artifactId>
+            <version>1.5.2</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>commons-cli</groupId>
+            <artifactId>commons-cli</artifactId>
+            <version>1.8.0</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.12.5</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.snakeyaml</groupId>
+            <artifactId>snakeyaml-engine</artifactId>
+            <version>2.6</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.36</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.tersesystems.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.tersesystems.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>io.undertow</groupId>
+            <artifactId>undertow-servlet</artifactId>
+            <version>2.3.6.Final</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>io.undertow</groupId>
+            <artifactId>undertow-websockets-jsr</artifactId>
+            <version>2.3.4.Final</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.fuzzylite</groupId>
+            <artifactId>jfuzzylite</artifactId>
+            <version>6.0.1</version>
+        </dependency>
+    </dependencies>
+
     <profiles>
-        <!-- Profile para desarrollo local usando archivos del sistema -->
-        <profile>
-            <id>local-dev</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <dependencies>
-                <!-- Dependencias BESA locales -->
-                <dependency>
-                    <groupId>io.github.iscoutb</groupId>
-                    <artifactId>kernel-besa</artifactId>
-                    <version>3.5.1</version>
-                    <scope>system</scope>
-                    <systemPath>${project.basedir}/../KernelBESA/target/kernel-besa-3.6.0.jar</systemPath>
-                </dependency>
-                <dependency>
-                    <groupId>io.github.iscoutb</groupId>
-                    <artifactId>rational-besa</artifactId>
-                    <version>3.5</version>
-                    <scope>system</scope>
-                    <systemPath>${project.basedir}/../RationalBESA/target/rational-besa-3.6.0.jar</systemPath>
-                </dependency>
-                <dependency>
-                    <groupId>io.github.iscoutb</groupId>
-                    <artifactId>bdi-besa</artifactId>
-                    <version>3.5</version>
-                    <scope>system</scope>
-                    <systemPath>${project.basedir}/../BDIBESA/target/bdi-besa-3.6.0.jar</systemPath>
-                </dependency>
-                <dependency>
-                    <groupId>io.github.iscoutb</groupId>
-                    <artifactId>ebdi-besa</artifactId>
-                    <version>3.5</version>
-                    <scope>system</scope>
-                    <systemPath>${project.basedir}/../eBDIBESA/target/ebdi-besa-3.6.0.jar</systemPath>
-                </dependency>
-                <dependency>
-                    <groupId>io.github.iscoutb</groupId>
-                    <artifactId>local-besa-simple</artifactId>
-                    <version>3.5</version>
-                    <scope>system</scope>
-                    <systemPath>${project.basedir}/../LocalBESA/target/local-besa-simple-3.6.0.jar</systemPath>
-                </dependency>
-                <dependency>
-                    <groupId>io.github.iscoutb</groupId>
-                    <artifactId>remote-besa</artifactId>
-                    <version>3.5</version>
-                    <scope>system</scope>
-                    <systemPath>${project.basedir}/../RemoteBESA/target/remote-besa-3.6.0.jar</systemPath>
-                </dependency>
-            </dependencies>
-        </profile>
-
-        <!-- Profile para GitHub Packages -->
-        <profile>
-            <id>github-packages</id>
-            <repositories>
-                <repository>
-                    <id>github</id>
-                    <url>https://maven.pkg.github.com/ISCOUTB/*</url>
-                    <snapshots>
-                        <enabled>true</enabled>
-                    </snapshots>
-                </repository>
-            </repositories>
-            <dependencies>
-                <!-- Dependencias BESA desde GitHub Packages -->
-                <dependency>
-                    <groupId>io.github.iscoutb</groupId>
-                    <artifactId>kernel-besa</artifactId>
-                    <version>3.5.1</version>
-                </dependency>
-                <dependency>
-                    <groupId>io.github.iscoutb</groupId>
-                    <artifactId>rational-besa</artifactId>
-                    <version>3.5</version>
-                </dependency>
-                <dependency>
-                    <groupId>io.github.iscoutb</groupId>
-                    <artifactId>bdi-besa</artifactId>
-                    <version>3.5</version>
-                </dependency>
-                <dependency>
-                    <groupId>io.github.iscoutb</groupId>
-                    <artifactId>ebdi-besa</artifactId>
-                    <version>3.5</version>
-                </dependency>
-                <dependency>
-                    <groupId>io.github.iscoutb</groupId>
-                    <artifactId>local-besa-simple</artifactId>
-                    <version>3.5</version>
-                </dependency>
-                <dependency>
-                    <groupId>io.github.iscoutb</groupId>
-                    <artifactId>remote-besa</artifactId>
-                    <version>3.5</version>
-                </dependency>
-            </dependencies>
-        </profile>
-
         <!-- Profile para perfilado (mantenido por compatibilidad) -->
         <profile>
             <id>Perfilado</id>
@@ -333,86 +350,11 @@
         </plugins>
     </build>
 
-    <dependencies>
-        <!-- Dependencias externas (no-BESA) -->
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20231013</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.jgrapht</groupId>
-            <artifactId>jgrapht-core</artifactId>
-            <version>1.5.2</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>commons-cli</groupId>
-            <artifactId>commons-cli</artifactId>
-            <version>1.8.0</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>2.12.5</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.10.1</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.snakeyaml</groupId>
-            <artifactId>snakeyaml-engine</artifactId>
-            <version>2.6</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.36</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.tersesystems.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>1.2.0</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.tersesystems.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.2.0</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>io.undertow</groupId>
-            <artifactId>undertow-servlet</artifactId>
-            <version>2.3.6.Final</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>io.undertow</groupId>
-            <artifactId>undertow-websockets-jsr</artifactId>
-            <version>2.3.4.Final</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.fuzzylite</groupId>
-            <artifactId>jfuzzylite</artifactId>
-            <version>6.0.1</version>
-        </dependency>
-    </dependencies>
-
     <distributionManagement>
         <repository>
             <id>github</id>
             <name>GitHub ISCOUTB Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/ISCOUTB/wpsSimulator</url>
+            <url>https://maven.pkg.github.com/ISCOUTB/wpsSimple</url>
         </repository>
     </distributionManagement>
 
